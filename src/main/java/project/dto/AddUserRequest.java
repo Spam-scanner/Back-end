@@ -9,5 +9,5 @@ public class AddUserRequest {
     private String userID;
     private String email;
     private String password;
-    private boolean gender;
+    private int age;
 }
