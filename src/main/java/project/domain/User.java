@@ -31,15 +31,15 @@ public class User implements UserDetails {
     @Column(name="password",nullable = false)
     private String password;
 
-    @Column(name="gender",nullable = false,updatable = false)
-    private boolean gender;
+    @Column(name="age",nullable = false)
+    private int age;
 
     @Builder
-    public User(String userID, String email, String password, boolean gender, String auth){
+    public User(String userID, String email, String password, int age, String auth){
         this.userID = userID;
         this.email=email;
         this.password=password;
-        this.gender=gender;
+        this.age=age;
     }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities(){

@@ -18,7 +18,7 @@ public class UserService {
                 .userID(dto.getUserID())
                 .email(dto.getEmail())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
-                .gender(dto.isGender())
+                .age(dto.getAge())
                 .build()).getId();
     }
     public boolean isIdExists(String userID){
