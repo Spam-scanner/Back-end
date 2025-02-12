@@ -23,6 +23,9 @@ public class UserViewController {
     }
     @GetMapping("/article")
     public String mainpage(){return "article";}
-
+    @GetMapping("/result")
+    public String result(){return "result";}
+    @GetMapping("/analyze")
+    public String analyze(){return "analyze";}
 
 }
