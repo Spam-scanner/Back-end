@@ -13,7 +13,6 @@
 </head>
 <body class="gradient-custom">
 <div th:if="${iderror}" class="id-alert"></div>
-<div th:if="${emailerror}" class="email-alert"></div>
 <section class="d-flex vh-100">
     <div class="container-fluid row justify-content-center align-content-center">
         <div class="card bg-dark" style="border-radius: 1rem;">
@@ -31,10 +30,6 @@
                         <div class="mb-3">
                             <label class="form-label text-white">비밀번호</label>
                             <input type="password" class="form-control" name="password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label text-white">이메일</label>
-                            <input type="email" class="form-control" name="email">
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-white">나이</label>
@@ -57,12 +52,6 @@
         if (popup) {
             popup.style.display = 'block';
             alert('존재하는 아이디입니다');
-            location.href='/signup'
-        }
-        var popup = document.querySelector('.email-alert');
-        if (popup) {
-            popup.style.display = 'block';
-            alert('존재하는 이메일입니다');
             location.href='/signup'
         }
     }

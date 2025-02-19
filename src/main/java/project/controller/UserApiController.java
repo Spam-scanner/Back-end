@@ -25,10 +25,6 @@ public class UserApiController {
             model.addAttribute("iderror", true);
             return "signup";
         }
-        if (userService.isEmailExists(user.getEmail())) {
-            model.addAttribute("emailerror",true);
-            return "signup";
-        }
         userService.save(request);
         return "redirect:/login";
     }

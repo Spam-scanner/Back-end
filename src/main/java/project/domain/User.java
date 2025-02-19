@@ -25,9 +25,6 @@ public class User implements UserDetails {
     @Column(name="userID",nullable = false,updatable = false,unique = true)
     private String userID;
 
-    @Column(name="email",nullable = false,unique = true)
-    private String email;
-
     @Column(name="password",nullable = false)
     private String password;
 
@@ -37,7 +34,6 @@ public class User implements UserDetails {
     @Builder
     public User(String userID, String email, String password, int age, String auth){
         this.userID = userID;
-        this.email=email;
         this.password=password;
         this.age=age;
     }
