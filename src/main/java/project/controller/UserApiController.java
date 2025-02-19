@@ -10,9 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import project.domain.User;
 import project.dto.AddUserRequest;
+import project.service.AnalysisService;
 import project.service.UserService;
+
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -32,5 +36,13 @@ public class UserApiController {
     public String logout(HttpServletRequest request, HttpServletResponse response){
         new SecurityContextLogoutHandler().logout(request,response, SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/login?logout";
+    }
+    @PostMapping("/api/analyze")
+    public String analyzeText(@RequestParam("inputText") String inputText, Model model) {
+        Map<String, Object> result = AnalysisService.analyzeText
+
+        model.addAllAttributes(result);
+
+        return "result";
     }
 }

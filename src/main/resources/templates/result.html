@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>분석 결과</title>
+  <style>
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+    .content {
+      padding: 20px;
+    }
+    .result-section {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-
+<div class="header">
+  <button onclick="logout()">로그아웃</button>
+  <!-- 재분석 버튼: 분석 페이지(analyze.html)로 이동 -->
+  <button onclick="location.href='/analyzePage'">재분석하기</button>
+</div>
+<div class="content">
+  <h1>분석 결과</h1>
+  <div class="result-section">
+    <h2>스팸 분석 결과</h2>
+    <!-- Spring Boot 컨트롤러에서 전달한 spamScore, spamMessage 사용 -->
+    <p th:text="'점수: ' + ${spamScore} + ' - ' + ${spamMessage}"></p>
+  </div>
+  <div class="result-section">
+    <h2>피싱 분석 결과</h2>
+    <!-- Spring Boot 컨트롤러에서 전달한 phishingScore, phishingMessage 사용 -->
+    <p th:text="'점수: ' + ${phishingScore} + ' - ' + ${phishingMessage}"></p>
+  </div>
+</div>
+<script>
+  function logout() {
+    alert("로그아웃 되었습니다.");
+  }
+</script>
 </body>
 </html>
