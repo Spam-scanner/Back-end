@@ -31,6 +31,7 @@ Telegram,50
 .gg,40
 .dev,40
 .gl,40
+.xyz,40
 당첨,30
 VIP,30
 코인,30

@@ -18,6 +18,30 @@
       padding: 10px;
       border: 1px solid #ccc;
     }
+    .risk-level {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .안심 { color: green; }
+    .주의 { color: #FFA500; }
+    .위험 { color: #FF4500; }
+    .심각 { color: red; }
+    .risk-description {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .risk-box {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
+    .risk-안심 { background-color: green; }
+    .risk-주의 { background-color: #FFA500; }
+    .risk-위험 { background-color: #FF4500; }
+    .risk-심각 { background-color: red; }
   </style>
 </head>
 <body>
@@ -29,11 +53,18 @@
   <h1>분석 결과</h1>
   <div class="result-section">
     <h2>스팸 분석 결과</h2>
-    <p th:text="${spamMessage}"></p>
+    <p class="risk-level" th:text="${spamMessage}" th:classappend="${spamMessage}"></p>
   </div>
   <div class="result-section">
     <h2>피싱 분석 결과</h2>
-    <p th:text="${phishingMessage}"></p>
+    <p class="risk-level" th:text="${phishingMessage}" th:classappend="${phishingMessage}"></p>
+  </div>
+
+  <div class="risk-description">
+    <div class="risk-box risk-안심">안심</div>
+    <div class="risk-box risk-주의">주의</div>
+    <div class="risk-box risk-위험">위험</div>
+    <div class="risk-box risk-심각">심각</div>
   </div>
 </div>
 </body>

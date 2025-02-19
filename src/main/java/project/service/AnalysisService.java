@@ -35,24 +35,24 @@ public class AnalysisService {
 
         String spamMessage;
         if (spamScore < 30) {
-            spamMessage = "스팸이 아닙니다.";
+            spamMessage = "안심";
         } else if (spamScore < 60) {
-            spamMessage = "스팸일 가능성이 있습니다.";
+            spamMessage = "주의";
         } else if (spamScore < 90) {
-            spamMessage = "스팸일 가능성이 높습니다.";
+            spamMessage = "위험";
         } else {
-            spamMessage = "스팸이 확실합니다.";
+            spamMessage = "심각";
         }
 
         String phishingMessage;
         if (phishingScore < 30) {
-            phishingMessage = "피싱이 아닙니다.";
+            phishingMessage = "안심";
         } else if (phishingScore < 60) {
-            phishingMessage = "피싱일 가능성이 있습니다.";
+            phishingMessage = "주의";
         } else if (phishingScore < 90) {
-            phishingMessage = "피싱일 가능성이 높습니다.";
+            phishingMessage = "위험";
         } else {
-            phishingMessage = "피싱이 확실합니다.";
+            phishingMessage = "심각";
         }
 
         Map<String, Object> result = new HashMap<>();
