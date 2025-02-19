@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("userID")
-                .defaultSuccessUrl("/article")
+                .defaultSuccessUrl("/article",true)    //true로 해놔야 강제이동. true없으면 기존접속페이지 링크로이동해서 오류발생
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout")

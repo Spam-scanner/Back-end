@@ -1,41 +1,38 @@
 package project.service;
+
+import org.springframework.stereotype.Service;
+import jakarta.annotation.PostConstruct;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
-
 @Service
 public class AnalysisService {
+    private Map<String, Integer> spamWords;
+    private Map<String, Integer> phishingWords;
+
+    @PostConstruct
+    public void init() {
+        spamWords = loadWords("/words/spam_words.txt");
+        phishingWords = loadWords("/words/phishing_words.txt");
+    }
 
     public Map<String, Object> analyzeText(String inputText) {
         int spamScore = 0;
         int phishingScore = 0;
 
-        // [스팸 단어 설정] - 추후 수정 가능하도록 분리
-        Map<String, Integer> spamWords = new HashMap<>();
-        spamWords.put("word1", 10);
-        spamWords.put("word2", 20);
-        // 추가 스팸 단어와 점수 설정 가능
-
-        // [피싱 단어 설정] - 추후 수정 가능하도록 분리
-        Map<String, Integer> phishingWords = new HashMap<>();
-        phishingWords.put("phish1", 15);
-        phishingWords.put("phish2", 25);
-        // 추가 피싱 단어와 점수 설정 가능
-
-        // 스팸 점수 계산
         for (String word : spamWords.keySet()) {
             int count = countOccurrences(inputText.toLowerCase(), word.toLowerCase());
             spamScore += spamWords.get(word) * count;
         }
 
-        // 피싱 점수 계산
         for (String word : phishingWords.keySet()) {
             int count = countOccurrences(inputText.toLowerCase(), word.toLowerCase());
             phishingScore += phishingWords.get(word) * count;
         }
 
-        // 결과 메시지 결정 (스팸)
         String spamMessage;
         if (spamScore < 30) {
             spamMessage = "스팸이 아닙니다.";
@@ -47,7 +44,6 @@ public class AnalysisService {
             spamMessage = "스팸이 확실합니다.";
         }
 
-        // 결과 메시지 결정 (피싱)
         String phishingMessage;
         if (phishingScore < 30) {
             phishingMessage = "피싱이 아닙니다.";
@@ -59,18 +55,17 @@ public class AnalysisService {
             phishingMessage = "피싱이 확실합니다.";
         }
 
-        // 결과 값을 Map에 담아서 반환
         Map<String, Object> result = new HashMap<>();
-        result.put("spamScore", spamScore);
         result.put("spamMessage", spamMessage);
-        result.put("phishingScore", phishingScore);
         result.put("phishingMessage", phishingMessage);
 
         return result;
     }
 
-    // 입력 문자열에서 특정 단어가 몇 번 등장하는지 계산하는 헬퍼 메서드
     private int countOccurrences(String text, String word) {
+        text = cleanText(text);
+        word = cleanText(word);
+
         int count = 0;
         int idx = 0;
         while ((idx = text.indexOf(word, idx)) != -1) {
@@ -79,5 +74,34 @@ public class AnalysisService {
         }
         return count;
     }
-}
 
+    private String cleanText(String text) {
+        return text.replaceAll("[^가-힣a-zA-Z0-9]", "");  //특수문자,띄어쓰기 제거(영어,한국어,숫자만 남김)
+    }
+
+
+    private Map<String, Integer> loadWords(String filePath) {
+        Map<String, Integer> words = new HashMap<>();
+        try (
+                InputStream is = getClass().getResourceAsStream(filePath);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is))
+        ) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty() || line.startsWith("#")) {
+                    continue;
+                }
+                String[] parts = line.split(",");
+                if (parts.length == 2) {
+                    String word = parts[0].trim();
+                    int score = Integer.parseInt(parts[1].trim());
+                    words.put(word, score);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return words;
+    }
+}
