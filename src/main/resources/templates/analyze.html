@@ -30,32 +30,16 @@
 </head>
 <body>
 <div class="header">
-  <button onclick="logout()">로그아웃</button>
+  <button type="button" class="btn btn-secondary" onclick="location.href='/api/logout'">로그아웃</button>
 </div>
 <div class="content">
-  <h1>문자 분석</h1>
-  <!-- 입력폼: 사용자가 텍스트를 입력하고 /analyze 엔드포인트로 POST 전송 -->
-  <form action="/analyze" method="post">
+  <h1>스팸 분석기</h1>
+  <form action="/api/analyze" method="post">
     <textarea name="inputText" placeholder="분석할 문자를 입력하세요..."></textarea>
     <div class="button-container">
       <button type="submit">결과</button>
     </div>
   </form>
-  <!-- 스팸 단어 설정 템플릿 (참고용) -->
-  <div class="analysis-template">
-    <h2>스팸 단어 설정 (수정 가능)</h2>
-    <p>예시: {"word1": 10, "word2": 20}</p>
-  </div>
-  <!-- 피싱 단어 설정 템플릿 (참고용) -->
-  <div class="analysis-template">
-    <h2>피싱 단어 설정 (수정 가능)</h2>
-    <p>예시: {"phish1": 15, "phish2": 25}</p>
-  </div>
 </div>
-<script>
-  function logout() {
-    alert("로그아웃 되었습니다.");
-  }
-</script>
 </body>
 </html>
