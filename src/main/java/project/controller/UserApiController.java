@@ -33,7 +33,7 @@ public class UserApiController {
             return "signup";
         }
         userService.save(request);
-        return "login";
+        return "redirect:/login";
     }
     @GetMapping("/api/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response){

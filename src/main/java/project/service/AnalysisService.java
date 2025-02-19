@@ -76,7 +76,7 @@ public class AnalysisService {
     }
 
     private String cleanText(String text) {
-        return text.replaceAll("[^가-힣a-zA-Z0-9]", "");  //특수문자,띄어쓰기 제거(영어,한국어,숫자만 남김)
+        return text.replaceAll("[^가-힣a-zA-Z0-9.]", ""); //특수문자,띄어쓰기 제거(영어,한국어,숫자만 남김)
     }
 
 
