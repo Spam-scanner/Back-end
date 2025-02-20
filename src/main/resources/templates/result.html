@@ -22,10 +22,10 @@
       font-weight: bold;
       font-size: 18px;
     }
-    .안심 { color: green; }
-    .주의 { color: #FFA500; }
-    .위험 { color: #FF4500; }
-    .심각 { color: red; }
+    .낮음 { color: green; }
+    .있음 { color: #FFA500; }
+    .높음 { color: #FF4500; }
+    .확실 { color: red; }
     .risk-description {
       display: flex;
       justify-content: space-between;
@@ -38,10 +38,10 @@
       color: white;
       font-weight: bold;
     }
-    .risk-안심 { background-color: green; }
-    .risk-주의 { background-color: #FFA500; }
-    .risk-위험 { background-color: #FF4500; }
-    .risk-심각 { background-color: red; }
+    .risk-낮음 { background-color: green; }
+    .risk-있음 { background-color: #FFA500; }
+    .risk-높음 { background-color: #FF4500; }
+    .risk-확실 { background-color: red; }
   </style>
 </head>
 <body>
@@ -52,19 +52,18 @@
 <div class="content">
   <h1>분석 결과</h1>
   <div class="result-section">
-    <h2>스팸 분석 결과</h2>
-    <p class="risk-level" th:text="${spamMessage}" th:classappend="${spamMessage}"></p>
+    <h2>스팸 분석 결과</h2><br>
+    가능성 : <span class="risk-level" th:text="${spamMessage}" th:classappend="${spamMessage}"></span>
   </div>
   <div class="result-section">
-    <h2>피싱 분석 결과</h2>
-    <p class="risk-level" th:text="${phishingMessage}" th:classappend="${phishingMessage}"></p>
+    <h2>피싱 분석 결과</h2><br>
+    가능성 : <span class="risk-level" th:text="${phishingMessage}" th:classappend="${phishingMessage}"></span>
   </div>
-
   <div class="risk-description">
-    <div class="risk-box risk-안심">안심</div>
-    <div class="risk-box risk-주의">주의</div>
-    <div class="risk-box risk-위험">위험</div>
-    <div class="risk-box risk-심각">심각</div>
+    <div class="risk-box risk-낮음">가능성 낮음</div>
+    <div class="risk-box risk-있음">가능성 있음</div>
+    <div class="risk-box risk-높음">가능성 높음</div>
+    <div class="risk-box risk-확실">확실</div>
   </div>
 </div>
 </body>

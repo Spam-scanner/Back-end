@@ -35,24 +35,24 @@ public class AnalysisService {
 
         String spamMessage;
         if (spamScore < 30) {
-            spamMessage = "안심";
+            spamMessage = "낮음";
         } else if (spamScore < 60) {
-            spamMessage = "주의";
+            spamMessage = "있음";
         } else if (spamScore < 90) {
-            spamMessage = "위험";
+            spamMessage = "높음";
         } else {
-            spamMessage = "심각";
+            spamMessage = "확실";
         }
 
         String phishingMessage;
         if (phishingScore < 30) {
-            phishingMessage = "안심";
+            phishingMessage = "낮음";
         } else if (phishingScore < 60) {
-            phishingMessage = "주의";
+            phishingMessage = "있음";
         } else if (phishingScore < 90) {
-            phishingMessage = "위험";
+            phishingMessage = "높음";
         } else {
-            phishingMessage = "심각";
+            phishingMessage = "확실";
         }
 
         Map<String, Object> result = new HashMap<>();
@@ -76,7 +76,7 @@ public class AnalysisService {
     }
 
     private String cleanText(String text) {
-        return text.replaceAll("[^가-힣a-zA-Z0-9.]", ""); //특수문자,띄어쓰기 제거(영어,한국어,숫자만 남김)
+        return text.replaceAll("[^가-힣a-zA-Z.]", ""); //특수문자,띄어쓰기 제거(영어,한국어,숫자만 남김)
     }
 
 
