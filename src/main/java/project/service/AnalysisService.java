@@ -1,7 +1,8 @@
 package project.service;
 
-import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,6 +28,9 @@ public class AnalysisService {
             int count = countOccurrences(inputText.toLowerCase(), word.toLowerCase());
             spamScore += spamWords.get(word) * count;
         }
+
+        spamScore+=shapeSpecialCharacterScore(inputText);                                           //특수문자 가중처리(메모장에 적으면 불러올때 과부하 발생하여 java내부에서 처리)
+        phishingScore+=shapeSpecialCharacterScore(inputText)+circleSpecialCharacterScore(inputText);//특수문자 가중처리(메모장에 적으면 불러올때 과부하 발생하여 java내부에서 처리)
 
         for (String word : phishingWords.keySet()) {
             int count = countOccurrences(inputText.toLowerCase(), word.toLowerCase());
@@ -70,16 +74,16 @@ public class AnalysisService {
         int idx = 0;
         while ((idx = text.indexOf(word, idx)) != -1) {
             count++;
+            System.out.println(word);
             idx += word.length();
         }
         return count;
     }
 
     private String cleanText(String text) {
-        return text.replaceAll("[^가-힣a-zA-Z.]", ""); //특수문자,띄어쓰기 제거(영어,한국어,숫자만 남김)
+        return text.replaceAll("[^가-힣a-z0-9.①-ⓩ★☆♡♥●◆♠♣◇■▣▷☞☜▶▼◀▲◈☎【】]", "");
+        //특수문자,띄어쓰기 제거(영어,한국어,숫자만 남김)
     }
-
-
     private Map<String, Integer> loadWords(String filePath) {
         Map<String, Integer> words = new HashMap<>();
         try (
@@ -103,5 +107,28 @@ public class AnalysisService {
             e.printStackTrace();
         }
         return words;
+    }
+
+    private int shapeSpecialCharacterScore(String text) {
+        String specialCharRegex = "[★☆♡♥●◆♠♣◇■▣▷☞☜▶▼◀▲◈☎【】]";
+
+        int count = 0;
+        for (char c : text.toCharArray()) {
+            if (String.valueOf(c).matches(specialCharRegex)) {
+                count++;
+            }
+        }
+        return count*7;
+    }
+    private int circleSpecialCharacterScore(String text) {
+        String specialCharRegex = "[①-ⓩ]";
+
+        int count = 0;
+        for (char c : text.toCharArray()) {
+            if (String.valueOf(c).matches(specialCharRegex)) {
+                count++;
+            }
+        }
+        return count*60;
     }
 }
