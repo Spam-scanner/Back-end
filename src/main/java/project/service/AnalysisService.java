@@ -81,7 +81,7 @@ public class AnalysisService {
     }
 
     private String cleanText(String text) {
-        return text.replaceAll("[^가-힣a-z0-9.①-ⓩ★☆♡♥●◆♠♣◇■▣▷☞☜▶▼◀▲◈☎【】]", "");
+        return text.replaceAll("[^가-힣a-z0-9.①-ⓩ★☆♡♥●◆♠♣◇■▣▷☞☜▶▼◀▲◈☎【】↑↓]", "");
         //특수문자,띄어쓰기 제거(영어,한국어,숫자만 남김)
     }
     private Map<String, Integer> loadWords(String filePath) {
@@ -110,7 +110,7 @@ public class AnalysisService {
     }
 
     private int shapeSpecialCharacterScore(String text) {
-        String specialCharRegex = "[★☆♡♥●◆♠♣◇■▣▷☞☜▶▼◀▲◈☎【】]";
+        String specialCharRegex = "[★☆♡♥●◆♠♣◇■▣▷☞☜▶▼◀▲◈☎【】↑↓]";
 
         int count = 0;
         for (char c : text.toCharArray()) {
