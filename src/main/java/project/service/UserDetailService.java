@@ -1,10 +1,10 @@
 package project.service;
 
 import lombok.RequiredArgsConstructor;
-import project.domain.User;
-import project.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import project.domain.User;
+import project.repository.UserRepository;
 
 @RequiredArgsConstructor
 @Service
