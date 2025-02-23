@@ -13,18 +13,14 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public long save(AddUserRequest dto){
+    public User save(AddUserRequest dto){
         return userRepository.save(User.builder()
                 .userID(dto.getUserID())
-                .email(dto.getEmail())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
                 .age(dto.getAge())
-                .build()).getId();
+                .build());
     }
     public boolean isIdExists(String userID){
         return userRepository.existsByUserID(userID);
-    }
-    public boolean isEmailExists(String email){
-        return userRepository.existsByEmail(email);
     }
 }
