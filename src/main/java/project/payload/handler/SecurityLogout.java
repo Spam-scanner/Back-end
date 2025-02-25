@@ -9,7 +9,6 @@ import project.payload.status.SuccessStatus;
 
 @Component
 public class SecurityLogout {
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     //로그아웃 성공 시 JSON 응답 반환
     public static LogoutSuccessHandler logoutSuccessHandler() {
