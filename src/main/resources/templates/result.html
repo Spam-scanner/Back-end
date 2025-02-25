@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>분석 결과</title>
+  <style>
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+    .content {
+      padding: 20px;
+    }
+    .result-section {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .risk-level {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .낮음 { color: green; }
+    .있음 { color: #FFA500; }
+    .높음 { color: #FF4500; }
+    .확실 { color: red; }
+    .risk-description {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .risk-box {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
+    .risk-낮음 { background-color: green; }
+    .risk-있음 { background-color: #FFA500; }
+    .risk-높음 { background-color: #FF4500; }
+    .risk-확실 { background-color: red; }
+  </style>
 </head>
 <body>
-
+<div class="header">
+  <button type="button" class="btn btn-secondary" onclick="location.href='/api/logout'">로그아웃</button>
+  <button onclick="location.href='/analyze'">재분석하기</button>
+</div>
+<div class="content">
+  <h1>분석 결과</h1>
+  <div class="result-section">
+    <h2>스팸 분석 결과</h2><br>
+    가능성 : <span class="risk-level" th:text="${spamMessage}" th:classappend="${spamMessage}"></span>
+  </div>
+  <div class="result-section">
+    <h2>피싱 분석 결과</h2><br>
+    가능성 : <span class="risk-level" th:text="${phishingMessage}" th:classappend="${phishingMessage}"></span>
+  </div>
+  <div class="risk-description">
+    <div class="risk-box risk-낮음">가능성 낮음</div>
+    <div class="risk-box risk-있음">가능성 있음</div>
+    <div class="risk-box risk-높음">가능성 높음</div>
+    <div class="risk-box risk-확실">확실</div>
+  </div>
+</div>
 </body>
 </html>
