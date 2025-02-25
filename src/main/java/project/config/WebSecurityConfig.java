@@ -60,7 +60,7 @@ public class WebSecurityConfig {
                     .invalidateHttpSession(true)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> {  // ✅ 인증 실패 시 JSON 응답
+                .authenticationEntryPoint((request, response, authException) -> {  //인증 실패 시 JSON 응답
                     response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                     response.setContentType("application/json");
                     response.getWriter().write(objectMapper.writeValueAsString(
