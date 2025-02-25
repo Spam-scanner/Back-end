@@ -12,8 +12,6 @@ import project.payload.status.SuccessStatus;
 @Component
 public class SecurityLogin {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
     // 로그인 성공 시 JSON 응답 반환
     public static AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (request, response, authentication) -> {
