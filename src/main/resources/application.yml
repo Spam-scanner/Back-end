@@ -16,9 +16,3 @@ spring:
         format_sql: true
         hbm2ddl:
           auto: update
-
-  h2:
-    console:
-      enabled: false  # H2 Console 비활성화
-
-    defer-datasource-initialization: true

@@ -13,7 +13,8 @@ public enum SuccessStatus implements BaseStatus {
     NO_CONTENT(HttpStatus.NO_CONTENT,"COMMON_204","성공적으로 삭제되었습니다."),
 
     LOGIN_SUCCESS(HttpStatus.OK, "2002", "로그인 성공"),
-    LOGOUT_SUCCESS(HttpStatus.OK, "2003", "로그아웃 성공")
+    LOGOUT_SUCCESS(HttpStatus.OK, "2003", "로그아웃 성공"),
+    ANALYZE_SUCCESS(HttpStatus.OK,"2002", "분석 성공")
     ;
 
     private final HttpStatus httpStatus;

@@ -21,7 +21,7 @@ public class UserViewController {
     public String signup(){
         return "signup";
     }
-    @GetMapping("/article")
+    @GetMapping({"/", "/article"})
     public String mainpage(){return "article";}
     @GetMapping("/result")
     public String result(){return "result";}
