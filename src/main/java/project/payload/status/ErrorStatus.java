@@ -15,7 +15,10 @@ public enum ErrorStatus implements BaseStatus {
     FORBIDDEN(HttpStatus.FORBIDDEN, "COMMON_403", "금지된 요청입니다."),
 
     //user 회원가입 오류
-    ID_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "4002", "이미 존재하는 아이디 입니다.")
+    ID_ALREADY_EXIST(HttpStatus.BAD_REQUEST, "4001", "이미 존재하는 아이디 입니다."),
+
+    //입력값이 없을떄
+    INVALID_INPUT(HttpStatus.BAD_REQUEST, "4002", "입력값이 없습니다.")
     ;
     private final HttpStatus httpStatus;
     private final String code;

@@ -43,7 +43,7 @@ public class WebSecurityConfig {
                 .csrf().ignoringRequestMatchers("/api/**")  //API 요청 CSRF 비활성화
                 .and()
                 .authorizeRequests()
-                .requestMatchers("/api/users", "/api/users/login").permitAll()
+                .requestMatchers("/api/users", "/api/users/login", "/api/analyze").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 //로그인 구현
@@ -86,46 +86,3 @@ public class WebSecurityConfig {
     }
 
 }
-//이 밑은 이전 코드인데 혹시나 나중에 프론트랑 연결할때 필요할까봐 주석처리로 남겨두었습니다.
-//    private final UserDetailService userService;
-//
-//    @Bean
-//    public WebSecurityCustomizer configure() {
-//        return (web) -> web.ignoring()
-//                .requestMatchers("/static/**");
-//    }
-//
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        return http
-//                .authorizeRequests()
-//                .requestMatchers("/login", "/signup", "/api/user/**").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .usernameParameter("userID")
-//                .defaultSuccessUrl("/article")
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/login?logout")
-//                .invalidateHttpSession(true)
-//                .and()
-//                .csrf().disable()
-//                .build();
-//    }
-//
-//    @Bean
-//    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailService userDetailService) throws Exception {
-//        return http.getSharedObject(AuthenticationManagerBuilder.class)
-//                .userDetailsService(userService)
-//                .passwordEncoder(bCryptPasswordEncoder)
-//                .and()
-//                .build();
-//    }
-//
-//    @Bean
-//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//}
