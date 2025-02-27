@@ -3,8 +3,6 @@ package project.service;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import project.dto.AnalyzeResultResponse;
-import project.payload.status.ErrorStatus;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -28,7 +26,7 @@ public class AnalysisService {
         return inputText == null || inputText.trim().isEmpty();
     }
 
-    public AnalyzeResultResponse.ResultMessage analyzeText(String inputText) {
+    public Map<String, Object> analyzeText(String inputText) {
 
         int spamScore = 0;
         int phishingScore = 0;
@@ -68,19 +66,11 @@ public class AnalysisService {
             phishingMessage = "확실";
         }
 
+        Map<String, Object> result = new HashMap<>();
+        result.put("spamMessage", spamMessage);
+        result.put("phishingMessage", phishingMessage);
 
-        //스팸과 피싱중에서 더 가까운 것(점수가 큰 것)을 반환
-        if (spamScore > phishingScore) {
-            return AnalyzeResultResponse.ResultMessage.builder()
-                    .kind("spam")
-                    .state(spamMessage)
-                    .build();
-        } else {
-            return AnalyzeResultResponse.ResultMessage.builder()
-                    .kind("phishing")
-                    .state(phishingMessage)
-                    .build();
-        }
+        return result;
 
     }
 

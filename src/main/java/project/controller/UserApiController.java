@@ -2,16 +2,16 @@ package project.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.domain.User;
 import project.dto.AddUserRequest;
 import project.dto.AddUserResponse;
-import project.dto.AnalyzeResultResponse;
 import project.payload.CommonResponse;
 import project.service.AnalysisService;
 import project.service.UserService;
 import project.payload.status.*;
+
+import java.util.Map;
 
 @RequiredArgsConstructor
 //@Controller //HTML을 반환
@@ -37,13 +37,13 @@ public class UserApiController {
 
 
     @PostMapping("/analyze")
-    public CommonResponse<AnalyzeResultResponse.ResultMessage> analyzeText(
+    public CommonResponse<Map<String, Object>> analyzeText(
             @RequestParam("inputText") String inputText) {
         //null이거나 빈문자열이 온다면
         if(analysisService.isInputExists(inputText)) {
             return CommonResponse.onError(ErrorStatus.INVALID_INPUT);
         }
-        AnalyzeResultResponse.ResultMessage result = analysisService.analyzeText(inputText);
+        Map<String, Object> result = analysisService.analyzeText(inputText);
         return CommonResponse.onSuccess(SuccessStatus.ANALYZE_SUCCESS, result);
     }
 
