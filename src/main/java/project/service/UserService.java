@@ -13,12 +13,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public User save(AddUserRequest dto){
+    public long save(AddUserRequest dto){
         return userRepository.save(User.builder()
                 .userID(dto.getUserID())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
                 .age(dto.getAge())
-                .build());
+                .build()).getId();
     }
     public boolean isIdExists(String userID){
         return userRepository.existsByUserID(userID);
